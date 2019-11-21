@@ -34,3 +34,7 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
 Route::get('/', function () {
     return view('welcome');
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
