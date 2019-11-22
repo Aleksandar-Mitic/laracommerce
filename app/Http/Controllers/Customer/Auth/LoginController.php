@@ -5,10 +5,15 @@ namespace App\Http\Controllers\Customer\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Foundation\Auth\ThrottlesLogins;
 
 class LoginController extends Controller
 {
     
+    /**
+     * This trait has all the login throttling functionality.
+     */
+    use ThrottlesLogins;
 
     /**
      * Where to redirect users after login.
@@ -16,6 +21,24 @@ class LoginController extends Controller
      * @var string
      */
     protected $redirectTo = 'customer/dashboard';
+
+    /**
+     * Max login attempts allowed.
+     */
+    public $maxAttempts = 5;
+    /**
+     * Number of minutes to lock the login.
+     */
+    public $decayMinutes = 3;
+
+    /**
+     * Username used in ThrottlesLogins trait
+     * 
+     * @return string
+     */
+    public function username() {
+        return 'email';
+    }
 
     /**
      * Show the login form.
@@ -38,14 +61,24 @@ class LoginController extends Controller
         //Validation...
 		$this->validator($request);
 
+        //check if the user has too many login attempts.
+        if ($this->hasTooManyLoginAttempts($request)){
+            //Fire the lockout event.
+            $this->fireLockoutEvent($request);
+            //redirect the user back after lockout.
+            return $this->sendLockoutResponse($request);
+        }
+
         //Login the customer...
 		if(Auth::guard('customer')->attempt($request->only('email','password'),$request->filled('remember'))){
 			//Authentication passed...
 			return redirect()
 				->intended(route('customer.dashboard'))
 				->with('status','You are Logged in as customer!');
-	
-		}
+        }
+        
+        //keep track of login attempts from the user.
+        $this->incrementLoginAttempts($request);
 
 		//Authentication failed...
 		return $this->loginFailed();
