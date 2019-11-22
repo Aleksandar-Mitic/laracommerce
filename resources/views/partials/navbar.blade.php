@@ -34,13 +34,14 @@
                         <a class="nav-link" href="{{ route('register') }}">Register</a>
                     </li>
                 @endif
+                {{-- Admin part --}}
                 @if(Auth::guard('admin')->check())
                     <li class="nav-item dropdown">
                         <a id="adminDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::guard('admin')->user()->name }} (ADMIN) <span class="caret"></span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="adminDropdown">
-                            <a href="{{route('admin.dashboard')}}" class="dropdown-item">Dashboard</a>
+                            <a href="{{route('admin.dashboard')}}" class="dropdown-item">Admin dashboard</a>
                             <a class="dropdown-item" href="#" onclick="event.preventDefault();document.querySelector('#admin-logout-form').submit();">
                                 Logout
                             </a>
@@ -50,6 +51,25 @@
                         </div>
                     </li>
                 @endif
+
+                {{-- Customer part  --}}
+                @if(Auth::guard('customer')->check())
+                    <li class="nav-item dropdown">
+                        <a id="customerDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            {{ Auth::guard('customer')->user()->name }} (customer) <span class="caret"></span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="customerDropdown">
+                            <a href="{{route('customer.dashboard')}}" class="dropdown-item">Customer dashboard</a>
+                            <a class="dropdown-item" href="#" onclick="event.preventDefault();document.querySelector('#customer-logout-form').submit();">
+                                Logout
+                            </a>
+                            <form id="customer-logout-form" action="{{ route('customer.logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </div>
+                    </li>
+                @endif
+
             </ul>
         </div>
     </div>

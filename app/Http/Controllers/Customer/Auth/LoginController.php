@@ -15,7 +15,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = 'admin/dashboard';
+    protected $redirectTo = 'customer/dashboard';
 
     /**
      * Show the login form.
@@ -25,9 +25,9 @@ class LoginController extends Controller
     public function showLoginForm()
     {
         return view('auth.login',[
-            'title' => 'Admin Login',
-            'loginRoute' => 'admin.login',
-            'forgotPasswordRoute' => 'admin.password.request',
+            'title' => 'Customer Login',
+            'loginRoute' => 'customer.login',
+            'forgotPasswordRoute' => 'customer.password.request',
         ]);
         // return 'test';
     }
@@ -41,16 +41,13 @@ class LoginController extends Controller
     {
         //Validation...
 		$this->validator($request);
-		
 
-		// dd(Auth::guard());
-
-        //Login the admin...
-		if(Auth::guard('admin')->attempt($request->only('email','password'),$request->filled('remember'))){
+        //Login the customer...
+		if(Auth::guard('customer')->attempt($request->only('email','password'),$request->filled('remember'))){
 			//Authentication passed...
 			return redirect()
-				->intended(route('admin.dashboard'))
-				->with('status','You are Logged in as Admin!');
+				->intended(route('customer.dashboard'))
+				->with('status','You are Logged in as customer!');
 	
 		}
 
@@ -65,10 +62,10 @@ class LoginController extends Controller
     public function logout()
     {
 	  //logout the admin...
-	  Auth::guard('admin')->logout();
+	  Auth::guard('customer')->logout();
 	  return redirect()
-		  ->route('admin.login')
-		  ->with('status','Admin has been logged out!');
+		  ->route('customer.login')
+		  ->with('status','Customer has been logged out!');
     }
     /**
      * Validate the form data.
@@ -80,7 +77,7 @@ class LoginController extends Controller
     {
         //validation rules.
 		$rules = [
-			'email'    => 'required|email|exists:admins|min:5|max:191',
+			'email'    => 'required|email|exists:customers|min:5|max:191',
 			'password' => 'required|string|min:4|max:255',
 		];
 		//custom validation error messages.
