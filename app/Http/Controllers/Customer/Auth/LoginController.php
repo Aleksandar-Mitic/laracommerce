@@ -24,11 +24,7 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        return view('auth.login',[
-            'title' => 'Customer Login',
-            'loginRoute' => 'customer.login',
-            'forgotPasswordRoute' => 'customer.password.request',
-        ]);
+        return view('customer.login');
         // return 'test';
     }
     /**

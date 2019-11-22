@@ -19,7 +19,7 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
     Route::namespace('Auth')->group(function(){
         //Login Routes
         Route::get('/login','LoginController@showLoginForm')->name('login');
-        Route::post('/login','LoginController@login');
+        Route::post('/login','LoginController@login')->name('login.submit');
         Route::post('/logout','LoginController@logout')->name('logout');
         //Forgot Password Routes
         Route::get('/password/reset','ForgotPasswordController@showLinkRequestForm')->name('password.request');
@@ -39,7 +39,7 @@ Route::prefix('/customer')->name('customer.')->namespace('Customer')->group(func
     Route::namespace('Auth')->group(function(){
         //Login Routes
         Route::get('/login','LoginController@showLoginForm')->name('login');
-        Route::post('/login','LoginController@login');
+        Route::post('/login','LoginController@login')->name('login.submit');
         Route::post('/logout','LoginController@logout')->name('logout');
         //Forgot Password Routes
         Route::get('/password/reset','ForgotPasswordController@showLinkRequestForm')->name('password.request');

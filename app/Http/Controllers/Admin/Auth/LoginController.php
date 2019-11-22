@@ -24,12 +24,7 @@ class LoginController extends Controller
      */
     public function showLoginForm()
     {
-        return view('auth.login',[
-            'title' => 'Admin Login',
-            'loginRoute' => 'admin.login',
-            'forgotPasswordRoute' => 'admin.password.request',
-        ]);
-        // return 'test';
+        return view('admin.login');
     }
     /**
      * Login the admin.
@@ -46,7 +41,7 @@ class LoginController extends Controller
 		// dd(Auth::guard());
 
         //Login the admin...
-		if(Auth::guard('admin')->attempt($request->only('email','password'),$request->filled('remember'))){
+		if ( Auth::guard('admin')->attempt($request->only('email','password'), $request->filled('remember')) ) {
 			//Authentication passed...
 			return redirect()
 				->intended(route('admin.dashboard'))
