@@ -11,10 +11,18 @@
 |
 */
 
+Route::get('/', function () {
+    return view('home');
+});
+
+Route::get('/register', 'RegisterCustomerController@showRegistrationForm')->name('register');
+Route::post('/register', 'RegisterCustomerController@register');
+
+
 Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
 
     //All the admin routes will be defined here...
-    Route::get('/dashboard','DashboardController@index')->name('dashboard');
+    Route::get('/','DashboardController@index')->name('dashboard');
 
     Route::namespace('Auth')->group(function(){
         //Login Routes
@@ -51,8 +59,3 @@ Route::prefix('/customer')->name('customer.')->namespace('Customer')->group(func
 
 });
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Auth::routes();

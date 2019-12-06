@@ -70,7 +70,8 @@ class LoginController extends Controller
         }
 
         //Login the customer...
-		if(Auth::guard('customer')->attempt($request->only('email','password'),$request->filled('remember'))){
+        if (Auth::guard('customer')->attempt($request->only('email','password'),$request->filled('remember'))) 
+        {
 			//Authentication passed...
 			return redirect()
 				->intended(route('customer.dashboard'))
