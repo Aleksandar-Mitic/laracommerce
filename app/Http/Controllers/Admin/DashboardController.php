@@ -8,7 +8,7 @@ class DashboardController extends Controller
 {
 
     /**
-     * Only authorized in "admins" guard are allowed except for logout.
+     * Only authorized "admins" are allowed, but don't check logout route.
      * 
      * @return void
      */

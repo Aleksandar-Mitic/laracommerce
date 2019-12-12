@@ -31,6 +31,15 @@ class Customer extends Authenticatable
     ];
 
     /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'email_verified_at' => 'datetime',
+    ];
+
+    /**
      * Send the customer password reset notification.
      *
      * @param  string  $token

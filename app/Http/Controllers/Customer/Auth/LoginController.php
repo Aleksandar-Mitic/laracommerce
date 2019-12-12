@@ -5,15 +5,15 @@ namespace App\Http\Controllers\Customer\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
+use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
 {
     
     /**
-     * This trait has all the login throttling functionality.
+     * This trait has all the login functionality.
      */
-    use ThrottlesLogins;
+    use AuthenticatesUsers;
 
     /**
      * Where to redirect users after login.
@@ -30,6 +30,19 @@ class LoginController extends Controller
      * Number of minutes to lock the login.
      */
     public $decayMinutes = 3;
+
+
+    /**
+     * Create a new controller instance.
+     * Only authorized "customers" are allowed, but don't check logout route.
+     * 
+     * @return void
+     */
+    public function __construct()
+    {
+        // $this->middleware('guest:customer')->except('customer.logout');
+    }
+
 
     /**
      * Username used in ThrottlesLogins trait
@@ -91,11 +104,12 @@ class LoginController extends Controller
      */
     public function logout()
     {
-	  //logout the admin...
-	  Auth::guard('customer')->logout();
-	  return redirect()
-		  ->route('customer.login')
-		  ->with('status','Customer has been logged out!');
+	    //logout the admin...
+        Auth::guard('customer')->logout();
+      
+	    return redirect()
+		    ->route('customer.login')
+		    ->with('status','Customer has been logged out!');
     }
     /**
      * Validate the form data.

@@ -67,9 +67,18 @@
                     <a class="dropdown-item" href="#" onclick="event.preventDefault();document.querySelector('#logout-form').submit();">
                         Logout
                     </a>
-                    <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
+                    @auth('admin') 
+                        <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    @endauth
+
+                    @auth('customer')                       
+                        <form id="logout-form" action="{{ route('customer.logout') }}" method="POST" style="display: none;">
+                            @csrf
+                        </form>
+                    @endauth
+
                 </li>
             </ul>
         </li>

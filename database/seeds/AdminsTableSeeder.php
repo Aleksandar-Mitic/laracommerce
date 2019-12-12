@@ -20,9 +20,9 @@ class AdminsTableSeeder extends Seeder
             0 => 
             array (
                 'id' => 1,
-                'name' => 'Prof. Zoie Ryan DDS',
-                'email' => 'admin@admin.com',
-                'password' => '$2y$10$Q2cw54r3Sqwg00DUFfKkoewKogY034pGEy9ehZtRXRB9F6NZkKeza',
+                'name' => 'Aleksandar Mitic',
+                'email' => 'ravickalex@gmail.com',
+                'password' => '$2y$12$Ss4UVy0jlbv27yC03/aLWuaRpsQMgmZ9tO5RtSwCY0lYnujj56iJG',
                 'is_super' => 0,
                 'remember_token' => NULL,
                 'created_at' => '2019-11-21 08:12:31',

@@ -11,17 +11,15 @@
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ml-auto">
                 <!-- Authentication Links -->
-                @if(Auth::guard('web')->check())
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('customer.login') }}">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('register') }}">Register</a>
+                </li>
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('customer.login') }}">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}">Register</a>
-                    </li>
-                @endif
                 {{-- Admin part --}}
-                @if(Auth::guard('admin')->check())
+                @auth('admin')
                     <li class="nav-item dropdown">
                         <a id="adminDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::guard('admin')->user()->name }} (ADMIN) <span class="caret"></span>
@@ -36,10 +34,10 @@
                             </form>
                         </div>
                     </li>
-                @endif
+                @endauth
 
                 {{-- Customer part  --}}
-                @if(Auth::guard('customer')->check())
+                @auth('customer')
                     <li class="nav-item dropdown">
                         <a id="customerDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::guard('customer')->user()->name }} (customer) <span class="caret"></span>
@@ -54,7 +52,7 @@
                             </form>
                         </div>
                     </li>
-                @endif
+                @endauth
 
             </ul>
         </div>
