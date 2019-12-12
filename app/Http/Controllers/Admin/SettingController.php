@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Setting;
 use Illuminate\Http\Request;
+use App\Http\Controllers\BaseController;
 
-class SettingController extends Controller
+class SettingController extends BaseController
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,8 @@ class SettingController extends Controller
      */
     public function index()
     {
-        //
+        $this->setPageTitle('Settings', 'Manage Settings');
+        return view('admin.settings.index');
     }
 
     /**

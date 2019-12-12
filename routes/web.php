@@ -12,11 +12,11 @@
 */
 
 Route::get('/', function () {
-    // return view('home');
-    // echo  Config::get('site_name');
+    return view('home');
+    // echo  Config::get('settings.site_name');
     // Config::set('test', 'test value');
 
-    dd(config()->get('settings.currency_symbol'));
+    // dd(config()->get('settings.currency_symbol'));
     // dd(config());
 });
 
@@ -41,6 +41,10 @@ Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
         Route::get('/password/reset/{token}','ResetPasswordController@showResetForm')->name('password.reset');
         Route::post('/password/reset','ResetPasswordController@reset')->name('password.update');
     });
+
+    // Setting Routes    
+    Route::get('/settings', 'SettingController@index')->name('settings');
+    Route::post('/settings', 'SettingController@update')->name('settings.update');
 
 });
 
