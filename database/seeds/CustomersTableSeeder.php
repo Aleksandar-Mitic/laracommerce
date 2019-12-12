@@ -20,8 +20,8 @@ class CustomersTableSeeder extends Seeder
             0 => 
             array (
                 'id' => 1,
-                'name' => 'Aleksandar Mitic',
-                'email' => 'ravickalex@gmail.com',
+                'name' => 'Alex',
+                'email' => 'admin@admin.com',
                 'password' => '$2y$12$Ss4UVy0jlbv27yC03/aLWuaRpsQMgmZ9tO5RtSwCY0lYnujj56iJG',
                 'email_verified_at' => '2019-01-01 12:00:00',
                 'remember_token' => NULL,
