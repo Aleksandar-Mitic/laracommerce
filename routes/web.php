@@ -12,7 +12,12 @@
 */
 
 Route::get('/', function () {
-    return view('home');
+    // return view('home');
+    // echo  Config::get('site_name');
+    // Config::set('test', 'test value');
+
+    dd(config()->get('settings.currency_symbol'));
+    // dd(config());
 });
 
 Route::get('/register', 'RegisterCustomerController@showRegistrationForm')->name('register');

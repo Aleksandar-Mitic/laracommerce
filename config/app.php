@@ -176,6 +176,10 @@ return [
         App\Providers\TelescopeServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*
+        * Custon Service Providers
+        */
+        App\Providers\SettingServiceProvider::class,
     ],
 
     /*
