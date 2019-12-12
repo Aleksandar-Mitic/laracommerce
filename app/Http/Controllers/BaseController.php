@@ -73,7 +73,7 @@ class BaseController extends Controller
      * @param bool $withOldInputWhenError
      * @return \Illuminate\Http\RedirectResponse
      */
-    protected function responseRedirectBack($message, $type = 'info', $error = false, $withOldInputWhenError = false)
+    protected function responseRedirectBack($message, $type = 'info')
     {
         $this->setFlashMessage($message, $type);
         $this->showFlashMessages();
